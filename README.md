@@ -2,6 +2,8 @@
 
 일렉트론, 부트스트랩, HTML, Javascript로 구성하였습니다.
 
+![mapleApiTool](https://github.com/parkcode1675/NexonMapleApiTestTool/assets/108608320/cc687548-cd86-4bba-8a88-e7ad0d3472c0)
+
 넥슨 open API에서 키 발급받으셔서 사용 가능합니다.
 URL : https://openapi.nexon.com/
 
