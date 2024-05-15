@@ -8,4 +8,4 @@
 URL : https://openapi.nexon.com/
 
 프로젝트 실행
-  1. CMD에서 NexonMapleAPI폴더로 들어가 npm start 명령어 입력하여 실행
+  1. CMD에서 NexonMapleAPI폴더(소스가 있는 폴더)로 들어가 npm start 명령어 입력하여 실행
