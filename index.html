@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NexonMapleAPI</title>
+        <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+        <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="./active.js"></script>
+        <script src="./http.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="exampleInputEmail1" class="form-label">1. API KEY 입력</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input id="apiKey" type="text" class="form-control" placeholder="API KEY" value="test_ac9f8b60c27b9c294a27601a075f62f0f4204a5c6f3f61466b4dd05a67f47e1eacc6b465d4323df8e37dd4887a66c1a2">
+                        </div>            
+                        <!--<div class="col-1">
+                            <button type="button" class="btn btn-primary">Primary</button>
+                        </div>-->
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-12">
+                            <label for="exampleInputEmail1" class="form-label">2. 캐릭터 식별자(OCID)조회</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <input id="charName" type="text" class="form-control" placeholder="캐릭터 명">
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn-primary" onclick="ocidSearch()">검색</button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-12">
+                            <input id="ocidResult" type="text" class="form-control" placeholder="검색 결과" disabled>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-12">
+                            <label for="exampleInputEmail1" class="form-label">3. 조회 선택</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <select id="selectBox" class="form-select" onchange="changeSelect()">
+                                <option value="0" selected>캐릭터 정보 조회</option>
+                                <option value="1">유니온 정보 조회</option>
+                                <option value="2">길드 정보 조회</option>
+                                <option value="3">확률 정보 조회</option>
+                                <option value="4">랭킹 정보 조회</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" id="carDiv" style="display: block;">
+                        <div class="row" style="margin-top: 10px;">
+                            <label for="floatingEmptyPlaintextInput">캐릭터 식별자(OCID) 검색을 먼저 진행해 주세요.</label>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-10">
+                                <select id="selectCar" class="form-select">
+                                    <option value="0" selected>기본 정보 조회</option>
+                                    <option value="1">인기도 정보 조회</option>
+                                    <option value="2">종합 능력치 정보 조회</option>
+                                    <option value="3">하이퍼스택 정보 조회</option>
+                                    <option value="4">성향 정보 조회</option>
+                                    <option value="5">어빌리티 정보 조회</option>
+                                    <option value="6">장착 장비 정보 조회(캐시 장비 제외)</option>
+                                    <option value="7">장착 캐시 장비 정보 조회</option>
+                                    <option value="8">장착 심볼 정보 조회</option>
+                                    <option value="9">적용 세트 효과 정보 조회</option>
+                                    <option value="10">장착 헤어,성형,파부 정보 조회</option>
+                                    <option value="11">장착 안드로이드 정보 조회</option>
+                                    <option value="12">장착 펫 정보 조회</option>
+                                    <option value="13">스킬 정보 조회</option>
+                                    <option value="14">장착 링크 스킬 정보 조회</option>
+                                    <option value="15">V매트릭스 정보 조회</option>
+                                    <option value="16">HEXA 코어 정보 조회</option>
+                                    <option value="17">HEXA 매트릭스 설정 HEXA 스탯 정보 조회</option>
+                                    <option value="18">무릉도장 최고 기록 정보 조회</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" onclick="carSearch()">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="unionDiv" style="display: none;">
+                        <div class="row" style="margin-top: 10px;">
+                            <label for="floatingEmptyPlaintextInput">캐릭터 식별자(OCID) 검색을 먼저 진행해 주세요.</label>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-10">
+                                <select id="selectUnion" class="form-select">
+                                    <option value="0" selected>유니온 정보 조회</option>
+                                    <option value="1">유니온 공격대 정보 조회</option>
+                                    <option value="2">유니온 아티팩트 정보 조회</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" onclick="unionSearch()">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="guildDiv" style="display: none;">
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-12">
+                                <label for="exampleInputEmail1" class="form-label">4. 길드 식별자(oguild_id) 정보 조회</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <input id="guildName" type="text" class="form-control" placeholder="길드 이름">
+                            </div>
+                            <div class="col-4">
+                                <select id="selectServer" class="form-select">
+                                    <option value="0" selected>스카니아</option>
+                                    <option value="1">베라</option>
+                                    <option value="2">루나</option>
+                                    <option value="3">제니스</option>
+                                    <option value="4">크로아</option>
+                                    <option value="5">유니온</option>
+                                    <option value="6">엘리시움</option>
+                                    <option value="7">이노시스</option>
+                                    <option value="8">레드</option>
+                                    <option value="9">오로라</option>
+                                    <option value="10">아케인</option>
+                                    <option value="11">노바</option>
+                                    <option value="12">리부트</option>
+                                    <option value="13">리부트2</option>
+                                    <option value="14">버닝</option>
+                                    <option value="15">버닝2</option>
+                                    <option value="16">버닝3</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" onclick="oguildSearch()">검색</button>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-12">
+                                <input id="oguildResult" type="text" class="form-control" placeholder="검색 결과" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="gachaDiv" style="display: none;">
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-6">
+                                <input id="gachaCount" type="text" class="form-control" placeholder="Count 10 ~ 1000">
+                            </div>
+                            <div class="col-6">
+                                <input id="gachaDate" type="text" class="form-control" placeholder="날짜 EX/2023-12-27">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-10">
+                                <select id="selectGacha" class="form-select">
+                                    <option value="0" selected>스타포스 강화 결과 조회</option>
+                                    <option value="1">잠재능력 재설정 이용 결과 조회</option>
+                                    <option value="2">큐브 사용 결과 조회</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" onclick="gachaSearch()">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" id="rankDiv" style="display: none;">
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-12">
+                                <input id="rankDate" type="text" class="form-control" placeholder="날짜 EX/2023-12-27">
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-10">
+                                <select id="selectRank" class="form-select">
+                                    <option value="0" selected>종합 랭킹 정보 조회</option>
+                                    <option value="1">유니온 랭킹 정보 조회</option>
+                                    <option value="2">길드 랭킹 정보 조회</option>
+                                    <option value="3">무릉도장 랭킹 정보 조회</option>
+                                    <option value="4">더 시드 랭킹 정보 조회</option>
+                                    <option value="5">업적 랭킹 정보 조회</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button type="button" class="btn btn-primary" onclick="rankSearch()">검색</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <code id="consoleDiv">
+
+                    </code>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "nexonmapleapi",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^30.0.4"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1"
+  }
+}
