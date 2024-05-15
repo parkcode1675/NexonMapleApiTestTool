@@ -1,4 +1,3 @@
-"# NexonMapleApiTestTool" 
+NexonMapleApiTestTool
 
-
-"# 목적"-+
+목적
